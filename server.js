@@ -95,7 +95,8 @@ class Server {
 
       this.channels[cid].stats.bytesIn += bytes;
       this.stats.bytesIn += bytes;
-      this.channels[cid].stats.bytesOut += (bytes * this.channels[cid].clients);
+      this.channels[cid].stats.bytesOut += (bytes *
+       this.channels[cid].clients);
       this.stats.bytesOut += (bytes * this.channels[cid].clients);
 
       this.rx.to(cid).compress(false).emit('audio', data);
