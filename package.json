@@ -1,0 +1,29 @@
+{
+  "name": "facile-audio-server",
+  "version": "0.1.0",
+  "author": "streamer45",
+  "license": "MIT",
+  "description": "Facile.Audio Server",
+  "homepage": "https://facile.audio",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FacileAudio/facile-server.git"
+  },
+  "bugs": "https://github.com/FacileAudio/facile-server/issues",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "lint": "node node_modules/eslint/bin/eslint.js",
+    "lint-fix": "node node_modules/eslint/bin/eslint.js --fix "
+  },
+  "devDependencies": {
+    "eslint": "3.2.2",
+    "eslint-config-hapi": "9.1.0",
+    "eslint-plugin-hapi": "4.0.0"
+  },
+  "dependencies": {
+    "debug": "2.2.0",
+    "socket.io": "1.4.8"
+  }
+}
