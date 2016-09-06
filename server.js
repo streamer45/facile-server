@@ -36,7 +36,7 @@ class Server {
     debug('connection');
 
     if (Object.keys(this.channels).length >= this.config.maxChannels) {
-      return socket.emit('err', new Error('channels limit reached'));
+      return socket.emit('err', 'channels limit reached');
     }
 
     const cid = Crypto.randomBytes(8).toString('hex');
@@ -62,12 +62,12 @@ class Server {
 
     socket.on('config', (config) => {
       if (!this.channels[cid]) {
-        socket.emit('err', new Error('invalid channel'));
+        socket.emit('err', 'invalid channel');
         return socket.disconnect();
       }
 
       if (this.channels[cid].active) {
-        socket.emit('err', new Error('channel is active'));
+        socket.emit('err', 'channel is active');
         return socket.disconnect();
       }
 
@@ -79,12 +79,12 @@ class Server {
 
     socket.on('audio', (data) => {
       if (!this.channels[cid]) {
-        socket.emit('err', new Error('invalid channel'));
+        socket.emit('err', 'invalid channel');
         return socket.disconnect();
       }
 
       if (!this.channels[cid].active) {
-        socket.emit('err', new Error('channel has not been configured'));
+        socket.emit('err', 'channel has not been configured');
         return socket.disconnect();
       }
 
@@ -109,13 +109,12 @@ class Server {
     socket.on('channel', (cid) => {
 
       if (!this.channels[cid] || !this.channels[cid].active) {
-        socket.emit('err', new Error('invalid channel'));
+        socket.emit('err', 'invalid channel');
         return socket.disconnect();
       }
 
       if (this.channels[cid].clients >= this.config.maxClients) {
-        socket.emit('err',  new Error('listeners limit reached'));
-        return socket.disconnect();
+        return socket.emit('err', 'clients limit reached');
       }
 
       ++this.stats.connections;
